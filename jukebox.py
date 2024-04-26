@@ -1,5 +1,6 @@
 import sqlite3
 import tkinter
+from lyricsgenius import Genius
 
 class Scrollbox(tkinter.Listbox):
 
@@ -62,7 +63,7 @@ class DataListBox(Scrollbox):
             self.linked_box.clear()
 
     def on_select(self, event):
-        if self.linked_box:
+        if self.linked_box and self.curselection():
             index = self.curselection()[0]
             value = self.get(index),
 
