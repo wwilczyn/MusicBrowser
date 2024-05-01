@@ -1,5 +1,6 @@
 import sqlite3
 import tkinter
+
 from lyricsgenius import Genius
 
 class Scrollbox(tkinter.Listbox):
@@ -89,17 +90,19 @@ if __name__ == '__main__':
     main_window.columnconfigure(0, weight=2)
     main_window.columnconfigure(1, weight=2)
     main_window.columnconfigure(2, weight=2)
-    main_window.columnconfigure(3, weight=2) # spacer column on right
+    main_window.columnconfigure(4, weight=2) # spacer column on right
 
     main_window.rowconfigure(0, weight=1)
     main_window.rowconfigure(1, weight=5)
     main_window.rowconfigure(2, weight=5)
     main_window.rowconfigure(3, weight=1)
+    main_window.rowconfigure(4, weight=1)
 
     # ===== labels =====
     tkinter.Label(main_window, text="Artists").grid(row=0, column=0)
     tkinter.Label(main_window, text="Albums").grid(row=0, column=1)
     tkinter.Label(main_window, text="Songs").grid(row=0, column=2)
+    tkinter.Label(main_window, text="Song lyrics").grid(row=2, column=1, columnspan=2, sticky='nwe')
 
     # ===== Artist Listbox =====
     artist_list = DataListBox(main_window, conn, "artists", "name")
@@ -126,6 +129,12 @@ if __name__ == '__main__':
     # song_list_view.requery()
     song_list_view.grid(row=1, column=2, sticky='nsew', padx=(30, 0))
     song_list_view.config(border=2, relief='sunken')
+
+    # ===== Song lyrics Listbox =====
+    song = tkinter.Variable(main_window)
+    song_view = tkinter.Listbox(main_window)
+    song_view.grid(row=2, column=1, columnspan=2, sticky='nsew', padx=(30, 0), pady=(40, 0))
+    song_view.config(border=2, relief='sunken')
 
     album_list_view.link(song_list_view, "album")
 
